@@ -1,5 +1,5 @@
 const passport=require('passport');
-const keys = require('./keys');
+const keys = require('../keys');
 const GoogleStrategy=require('passport-google-oauth20');
 const model=require('../models/model')
 const FacebookStrategy=require('passport-facebook')

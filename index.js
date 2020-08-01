@@ -6,7 +6,7 @@ const passportsetup=require('./config/passport')
 const mongoose=require('mongoose');
 const passport=require('passport')
 const cookieSession=require('cookie-session');
-const keys = require('./config/keys');
+const keys = require('./keys');
 const db=`mongodb+srv://Praveen:${keys.db.password}@test.ldcov.mongodb.net/${keys.db.name}?retryWrites=true&w=majority`
 mongoose.connect(db,{useNewUrlParser:true,useUnifiedTopology:true},()=>{
     console.log('Connected');
