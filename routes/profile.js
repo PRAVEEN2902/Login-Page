@@ -13,6 +13,8 @@ const authcheck=(req,res,next)=>{
 
 router.get('/profile',authcheck,(req,res)=>{
     res.send('<a href="/logout">Logout</a>');
+    var user=req.user;
+    console.log('user details'+user);
 })
 
 

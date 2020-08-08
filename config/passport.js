@@ -2,7 +2,9 @@ const passport=require('passport');
 const keys = require('../keys');
 const GoogleStrategy=require('passport-google-oauth20');
 const model=require('../models/model')
+const LocalStrategy=require('passport-local').Strategy;
 const FacebookStrategy=require('passport-facebook')
+const bcrypt=require('bcrypt')
 passport.serializeUser((user,done)=>
 {
     done(null,user.id);
@@ -14,11 +16,45 @@ passport.deserializeUser((id,done)=>
     })
 })
 
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'passwrd'
+  },
+  function(username, password, done) {
+    //console.log(username);
+    model.find({email:username}).then(record=>{
+        if(record.length==0)
+        {
+            done(null,false,{message:'Invalid Email.If you are a new user kindly Register'});
+        }
+        else
+        {
+            bcrypt.compare(password,record[0].password).then(result=>{
+                if(result==true)
+                    done(null,record[0])
+                else
+                    done(null,false,{message:'Password Incorrect'});
+            })
+           
+            
+        }
+    })
+  }
+));
+
+
+
+
+
+
+
+
+
 passport.use(new FacebookStrategy({
     clientID: keys.facebook.FACEBOOK_APP_ID,
     clientSecret: keys.facebook.FACEBOOK_APP_SECRET,
     callbackURL: "http://localhost:3000/facebook/callback",
-    profileFields:['email']
+    profileFields:['email','displayName']
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile)

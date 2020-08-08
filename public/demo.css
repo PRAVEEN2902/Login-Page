@@ -52,7 +52,9 @@ body {
     text-align: center;
     
   }
-  
+  .error p{
+    color: red;
+  }
   .from-content {
     width: 420px;
     box-sizing: border-box;
@@ -106,6 +108,21 @@ body {
     border-radius: 22px;
   }
   .from-content .submit-btn button:hover {
+    background-color: #FF5476;
+  }
+  .from-content .submit-btn a {
+    background-color: #FE4066;
+    color: #FFF;
+    font-size: 16px;
+    height: 44px;
+    width: 100%;
+    display: block;
+    border-radius: 22px;
+    text-align: center;
+    line-height: 2.5em;
+    text-decoration: none;
+  }
+  .from-content .submit-btn a:hover {
     background-color: #FF5476;
   }
   
